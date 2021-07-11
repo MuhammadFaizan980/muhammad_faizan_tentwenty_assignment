@@ -49,7 +49,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
         widget._movieId,
       );
     } else {
-      _movieDetailsController.getCachedMovies(context, widget._movieId);
+      _movieDetailsController.getCachedMovieData(context, widget._movieId);
     }
   }
 

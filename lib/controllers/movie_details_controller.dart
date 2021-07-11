@@ -96,30 +96,28 @@ class MovieDetailsController {
       );
       Provider.of<MovieDetailsProvider>(context, listen: false)
           .addMovieDetails(_movieDetails);
-      if (_movieDetails != null) _cacheMovies(movieId);
+      if (_movieDetails != null) _cacheMovies(context, movieId);
     } catch (exc) {
       Provider.of<MovieDetailsProvider>(context, listen: false)
           .addMovieDetails(_movieDetails);
     }
   }
 
-  Future<void> _cacheMovies(int movieId) async {
+  Future<void> _cacheMovies(BuildContext context, int movieId) async {
     final database =
         await $FloorAppDatabase.databaseBuilder('app_database.db').build();
     MovieDetailsDao movieDetailsDao = database.movieDetailsDao;
     if (await movieDetailsDao.getMovieDetails(movieId) == null) {
       await movieDetailsDao.insertMovie(_movieDetails!);
-    } else {
       var a = await movieDetailsDao.getMovieDetails(movieId);
-      print(a!.releaseDate);
+      print(a!.rating);
     }
   }
 
-  Future<void> getCachedMovies(BuildContext context, int movieId) async {
+  Future<void> getCachedMovieData(BuildContext context, int movieId) async {
     final database =
         await $FloorAppDatabase.databaseBuilder('app_database.db').build();
     MovieDetailsDao movieDetailsDao = database.movieDetailsDao;
-
     Provider.of<MovieDetailsProvider>(context, listen: false)
         .addMovieDetails(await movieDetailsDao.getMovieDetails(movieId));
   }
