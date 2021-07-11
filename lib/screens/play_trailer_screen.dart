@@ -32,14 +32,16 @@ class _PlayTrailerScreenState extends State<PlayTrailerScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          YoutubePlayerBuilder(
-            player: YoutubePlayer(
-              onEnded: (_) {
-                Navigator.pop(context);
-              },
-              controller: _controller,
+          Expanded(
+            child: YoutubePlayerBuilder(
+              player: YoutubePlayer(
+                onEnded: (_) {
+                  Navigator.pop(context);
+                },
+                controller: _controller,
+              ),
+              builder: (BuildContext, player) => player,
             ),
-            builder: (BuildContext, player) => player,
           ),
         ],
       ),
