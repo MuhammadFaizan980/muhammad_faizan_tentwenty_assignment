@@ -96,14 +96,14 @@ class MovieDetailsController {
       );
       Provider.of<MovieDetailsProvider>(context, listen: false)
           .addMovieDetails(_movieDetails);
-      if (_movieDetails != null) _cachedMovies(movieId);
+      if (_movieDetails != null) _cacheMovies(movieId);
     } catch (exc) {
       Provider.of<MovieDetailsProvider>(context, listen: false)
           .addMovieDetails(_movieDetails);
     }
   }
 
-  Future<void> _cachedMovies(int movieId) async {
+  Future<void> _cacheMovies(int movieId) async {
     final database =
         await $FloorAppDatabase.databaseBuilder('app_database.db').build();
     MovieDetailsDao movieDetailsDao = database.movieDetailsDao;

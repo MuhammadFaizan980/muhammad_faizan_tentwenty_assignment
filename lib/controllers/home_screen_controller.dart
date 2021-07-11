@@ -9,13 +9,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenController {
-  bool _connectivityResult = false;
 
   Future<bool> checkInternetConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
-      _connectivityResult = true;
       return true;
     } else {
       return false;

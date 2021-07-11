@@ -1,5 +1,4 @@
 import 'package:faizan_tentwenty_assignment/controllers/home_screen_controller.dart';
-import 'package:faizan_tentwenty_assignment/controllers/ticket_controller.dart';
 import 'package:faizan_tentwenty_assignment/providers/home_screen_provider.dart';
 import 'package:faizan_tentwenty_assignment/providers/movie_details_provider.dart';
 import 'package:faizan_tentwenty_assignment/screens/home_screen.dart';
@@ -14,7 +13,6 @@ main() {
       () => HomeScreenController());
   GetIt.I.registerLazySingleton<MovieDetailsController>(
       () => MovieDetailsController());
-  GetIt.I.registerLazySingleton<TicketController>(() => TicketController());
   runApp(
     MultiProvider(
       providers: [

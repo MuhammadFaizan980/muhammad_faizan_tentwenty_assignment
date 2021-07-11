@@ -1,6 +1,9 @@
 import 'package:faizan_tentwenty_assignment/contracts/i_button_clicked.dart';
 import 'package:faizan_tentwenty_assignment/contracts/i_ticket_booked.dart';
+import 'package:faizan_tentwenty_assignment/dao/movie_ticket_dao.dart';
 import 'package:faizan_tentwenty_assignment/enums/button_type.dart';
+import 'package:faizan_tentwenty_assignment/local_db/app_database.dart';
+import 'package:faizan_tentwenty_assignment/models/movie_ticket.dart';
 import 'package:faizan_tentwenty_assignment/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -138,6 +141,17 @@ class _BookTicketScreenState extends State<BookTicketScreen>
     await pref.setInt(widget._movieId.toString(), widget._movieId);
     Utils.showSnackBar(context, 'Ticket Booked');
     widget._iTicketBooked.onTicketBooked();
+    final database =
+        await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+    MovieTicketDao movieTicketDao = database.movieTicketDao;
+    await movieTicketDao.insertTicket(
+      MovieTicket(
+        widget._movieId,
+        _selectedSeat,
+        _selectedLocation,
+        _selectedCinema,
+      ),
+    );
     Navigator.pop(context);
   }
 }

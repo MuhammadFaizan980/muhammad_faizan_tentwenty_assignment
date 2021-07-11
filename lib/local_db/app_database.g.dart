@@ -89,7 +89,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `MovieDetails` (`id` INTEGER NOT NULL, `rating` REAL NOT NULL, `name` TEXT NOT NULL, `overview` TEXT NOT NULL, `releaseDate` TEXT NOT NULL, `trailerYoutubeVideoId` TEXT NOT NULL, `encodedImagesList` TEXT NOT NULL, `encodedGeneresList` TEXT NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `MovieTicket` (`id` INTEGER NOT NULL, `movieId` INTEGER NOT NULL, `seatNumber` INTEGER NOT NULL, `location` TEXT NOT NULL, `cinemaName` TEXT NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `MovieTicket` (`id` INTEGER NOT NULL, `seatNumber` TEXT NOT NULL, `location` TEXT NOT NULL, `cinemaName` TEXT NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -214,7 +214,6 @@ class _$MovieTicketDao extends MovieTicketDao {
             'MovieTicket',
             (MovieTicket item) => <String, Object?>{
                   'id': item.id,
-                  'movieId': item.movieId,
                   'seatNumber': item.seatNumber,
                   'location': item.location,
                   'cinemaName': item.cinemaName
@@ -233,8 +232,7 @@ class _$MovieTicketDao extends MovieTicketDao {
     return _queryAdapter.query('SELECT * FROM MovieTicket WHERE id = ?1',
         mapper: (Map<String, Object?> row) => MovieTicket(
             row['id'] as int,
-            row['movieId'] as int,
-            row['seatNumber'] as int,
+            row['seatNumber'] as String,
             row['location'] as String,
             row['cinemaName'] as String),
         arguments: [id]);

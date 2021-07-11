@@ -4,11 +4,9 @@ import 'package:floor/floor.dart';
 class MovieTicket {
   @primaryKey
   late final int id;
-  late final int movieId;
-  late final int seatNumber;
+  late final String seatNumber;
   late final String location;
   late final String cinemaName;
 
-  MovieTicket(
-      this.id, this.movieId, this.seatNumber, this.location, this.cinemaName);
+  MovieTicket(this.id, this.seatNumber, this.location, this.cinemaName);
 }
